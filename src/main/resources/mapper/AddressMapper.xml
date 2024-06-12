@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huawei.mapper.AddressMapper" >
+
+<select id="selectAllByUid" resultType="address">
+select * from address
+<where>
+<if test="uid != null">address_user_uid=#{uid}</if>
+</where>
+</select>
+
+<select id="selectOne" resultType="address">
+select * from address where address_id=#{addressId}
+</select>
+
+<update id="updateAddress">
+update address
+<set>
+<if test="addressName != null and addressName != ''">address_name=#{addressName},</if>
+<if test="addressPhone != null and addressPhone != ''">address_phone=#{addressPhone},</if>
+<if test="addressPhone != null and addressPhone != ''">address_place=#{addressPlace}</if>
+</set>
+where address_id=#{addressId}
+</update>
+
+<delete id="deleteAddress">
+delete from address where address_id=#{addressId}
+</delete>
+
+<insert id="insertAddress">
+insert into address(address_name,address_phone,address_place,address_user_uid)
+values (#{addressName},#{addressPhone},#{addressPlace},#{addressUserUid})
+</insert>
+</mapper>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.huawei.mapper.OrderItemMapper" >
+
+<insert id="insertOrderItem">
+insert into orderitems(orderitems_order_id,orderitems_good_id,orderitems_number,orderitems_price)
+values (#{orderItemOrderId},#{orderItemGoodsId},#{orderItemNumber},#{orderItemPrice})
+</insert>
+
+<delete id="deleteOrderItem">
+delete orderitems where orderitems_order_id=#{orderItemOrderId}
+</delete>
+
+<resultMap id="orderItemRest" type="orderItem">
+<id property="orderItemOrderId" column="orderitems_order_id"></id>
+<result property="orderItemGoodsId" column="orderitems_good_id"></result>
+<result property="orderItemNumber" column="orderitems_number"></result>
+<result property="orderItemPrice" column="orderitems_price"></result>
+</resultMap>
+<select id="selectAllOrderItem" resultMap="orderItemRest">
+select * from orderitems where orderitems_order_id=#{orderItemOrderId}
+</select>
+</mapper>
